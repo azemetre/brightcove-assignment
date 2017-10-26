@@ -4,7 +4,8 @@
   "description": "Sample HTML Async API Calls",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "conversions": "npm run test tests/conversions.js"
   },
   "keywords": [
     "vanilla-javascript",
@@ -16,6 +17,7 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "4.1.2",
+    "chai-as-promised": "7.1.1",
     "mocha": "4.0.1",
     "pa11y": "4.13.1",
     "selenium-webdriver": "3.6.0"
