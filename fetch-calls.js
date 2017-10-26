@@ -1,11 +1,13 @@
+// stamps the anchor tag with todays date
 let latestDate = () => {
   let latest = new Date().toUTCString();
-  return latest = latest.split(' ').slice(0, 4).join(' ');
+  latest = latest.split(' ').slice(0, 4).join(' ');
+  return document.getElementById('dateAnchor').innerHTML = latest;
 };
 
 let getCurrs = function() {
   // date input to help console logging
-  let dateStamp = document.getElementById('dateInput').value;
+  let dateStamp = document.getElementById('dateAnchor').value;
 
   const fixerAPI = 'http://api.fixer.io/latest?base=USD';
 
@@ -18,12 +20,11 @@ let getCurrs = function() {
       let xRate = exchange.rates.GBP;
 
       // console logs for debugging
-      console.log(`USD to GBP for ${dateInput}`);
-      console.log(xRate);
+      // console.log('USD to GBP for today');
+      // console.log(xRate);
 
       // rewrite anchor tags with user input and conversion rates
       document.getElementById('exchangeRate').innerHTML = xRate;
-      document.getElementById('timeAnchor').innerHTML = dateInput;
     }))
     .catch((error) => {
       console.log('There\'s been an issue with my fetching: ' + error.message);
@@ -33,14 +34,14 @@ let getCurrs = function() {
 
 // using sessionStorage to store currency conversions and date items
 // will only delete date items when user closes the tab or browser
+
 let saveSession = () => {
   window.onbeforeunload = () => {
     sessionStorage.setItem('rate-save', document.getElementById('exchangeRate').innerHTML);
-    sessionStorage.setItem('date-save', document.getElementById('timeAnchor').innerHTML)
   };
-
-  window.onload = () => {
-    document.getElementById('exchangeRate').innerHTML = sessionStorage.getItem('rate-save');
-    document.getElementById('timeAnchor').innerHTML = sessionStorage.getItem('date-save');
-  }
 };
+
+let getSession = () => {
+  let data = sessionStorage.getItem('rate-save');
+  return document.getElementById('exchangeRate').innerHTML = data || '###.###';
+}
