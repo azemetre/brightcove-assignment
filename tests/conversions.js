@@ -4,7 +4,6 @@ const expect = chai.expect;
 
 chai.use(require('chai-as-promised'));
 
-
 describe('Simple Currency Conversion - Chrome', function() {
   this.timeout(50000);
 
@@ -28,7 +27,7 @@ describe('Simple Currency Conversion - Chrome', function() {
 
     it('Exchange rate equals ###.###', function () {
 
-      driver.sleep(10500);
+      driver.sleep(2500);
       let exchangeTag = driver.findElement({
         css: 'div.container p a#exchangeRate'
       }).getText();
