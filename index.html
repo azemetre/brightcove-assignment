@@ -6,24 +6,19 @@
   <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
   <title>Currency Converter</title>
 </head>
-<body>
+<body onload="getSession(); latestDate()">
 
   <h1>Simple Currency Converter</h1>
 
   <div class="container">
 
-    <p class="exchangeArea">
-      The conversion of 1 <a href="#" id="parentAnchor">USD</a> to <a href="#" id="childAnchor">GBP</a> for <a href="#" id="timeAnchor">today</a> is: <a href="#" id="exchangeRate">#.###</a>
+    <p class="exchange-information">
+      The conversion of 1 <a href="#">United States Dollar</a> to a <a href="#" id="childAnchor">British Pound</a> for <a href="#" id="dateAnchor">today</a> is: <a href="#" id="exchangeRate"></a>
     </p>
 
-    <label class="label-style" id="fixer-currency-conversions">
-      <input type="text" id="dateInput" name="time" placeholder="EX: 2008-01-20; Default Value = Today">
-    </label>
-
-    <button id="fixerButton" type="submit" onclick="getCurrs(); saveSession()">Convert!</button>
+    <button id="fixerButton" type="submit" onclick="getCurrs(); saveSession();">Convert!</button>
 
   </div>
-
-  <script src="fetch-calls.js"></script>
+  <script src="fetch-calls.js"></script> 
 </body>
 </html>
