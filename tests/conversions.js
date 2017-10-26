@@ -22,7 +22,7 @@ describe('Simple Currency Conversion - Chrome', function () {
 
   describe('verify currency hasn\'t been converted', function () {
     it('Exchange rate equals ###.###', function () {
-      driver.sleep(2500);
+      driver.sleep(1000);
       let exchangeTag = driver.findElement({
         css: 'div.container p a#exchangeRate'
       }).getText();
