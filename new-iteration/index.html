@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+n<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,28 +6,42 @@
   <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
   <title>Currency Converter</title>
 </head>
-<body onload="getSession(); latestDate()">
+<body onload="getSession();">
+  
 
   <h1>Simple Multi-Currency Converter</h1>
 
   <div class="container">
 
-    <p class="exchange-information">
-      The conversion of 1 <a href="#" id="parentAnchor">USD</a> to <a href="#" id="childAnchor">GBP</a> for <a href="#" id="timeAnchor">today</a> is: <a href="#" id="exchangeRate">###.###</a>
-    </p>
+    <p class="exchange-info">Your currency manipulations will appear here.</p>
 
     <label class="label-style" id="fixer-currency-conversions">
       <input type="text" id="dateInput" name="time" placeholder="EX: 2008-01-20">
-      <input type="text" id="parentInput" name="currencyParent" placeholder="EX: JPY">
-      <input type="text" id="childInput" name="currencyChild" placeholder="EX: RUB">
+
+      <select name="currency-selectors" id="fixer-currency-conversions">
+        <option class="parent-option" value="USD" selected>United States Dollar</option>
+        <option class="parent-option" value="EUR">Euro</option>
+        <option class="parent-option" value="GBP">British Pound</option>
+        <option class="parent-option" value="JPY">Japanese Yen</option>
+        <option class="parent-option" value="SEK">Swedish Kroner</option>
+        <option class="parent-option" value="HKD">Hong Kong Dollar</option>
+        <option class="parent-option" value="MXN">Mexican Peso</option>
+        <option class="parent-option" value="CNY">Chinese Yuan</option>
+      </select>
+
+      <select name="currency-selectors" id="fixer-currency-conversions">
+        <option class="child-option" value="USD">United States Dollar</option>
+        <option class="child-option" value="EUR">Euro</option>
+        <option class="child-option" value="GBP" selected>British Pound</option>
+        <option class="child-option" value="JPY">Japanese Yen</option>
+        <option class="child-option" value="SEK">Swedish Kroner</option>
+        <option class="child-option" value="HKD">Hong Kong Dollar</option>
+        <option class="child-option" value="MXN">Mexican Peso</option>
+        <option class="child-option" value="CNY">Chinese Yuan</option>
+      </select>
     </label>
 
-    <button id="fixerButton" type="submit" onclick="getCurrs(); saveSession()">Convert</button>
-
-    <p>
-      Acceptable abbreviations for other currencies: AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HKD, HRK, HUF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY, USD, ZAR
-    </p>
-
+    <button id="fixerButton" type="submit" onclick="getCurrs();">Convert</button>
   </div>
 
   <script src="main.js"></script>

@@ -1,49 +1,41 @@
 let latestDate = () => {
   let latest = new Date().toUTCString();
   return latest = latest.split(' ').slice(0, 4).join(' ');
-}
+};
 
 let getCurrs = function() {
   let dateInput = document.getElementById('dateInput').value || "latest";
 
-  let parentInput = document.getElementById('parentInput').value || 'USD';
+  let parentOption = document.querySelector('.parent-option:checked').value;
 
-  let childInput = document.getElementById('childInput').value || 'GBP';
+  let childOption = document.querySelector('.child-option:checked').value;
 
-  const fixerAPI = `http://api.fixer.io/${dateInput}?base=${parentInput}`;
+  const fixerAPI = `http://api.fixer.io/${dateInput}?base=${parentOption}`;
 
   fetch(fixerAPI)
     .then((response) => response.json())
-    .then((exchange => {
-      console.log(`${parentInput} to ${childInput} for ${dateInput}`);
-      let xRate = exchange.rates[childInput];
-      console.log(xRate);
-      document.getElementById('exchangeRate').innerHTML = xRate;
-      
-      document.getElementById('timeAnchor').innerHTML = dateInput;
-      document.getElementById('parentAnchor').innerHTML = parentInput;
-      document.getElementById('childAnchor').innerHTML = childInput;
-    }))
+    .then(exchange => {
+      let xRate = exchange.rates[childOption];
+      console.log(`${parentOption} to ${childOption} for ${dateInput} is ${xRate}`);
+      let templateInfo = `The conversion of 1 ${parentOption} to ${childOption} for ${dateInput} is ${xRate}`;
+
+      document.querySelector('p.exchange-info').innerText = templateInfo;
+
+      let testStorage = window.onbeforeunload = () => {
+        sessionStorage.setItem('xchg-info', document.querySelector('p.exchange-info').innerText);
+        let data = sessionStorage.getItem('xchg-info');
+        console.log(`${data} successfully saved`);
+      };
+      return testStorage();
+    })
     .catch((error) => {
       console.log('There\'s been an issue with my fetching: ' + error.message);
     });
 };
 
-let saveSession = () => {
-  window.onbeforeunload = () => {
-    sessionStorage.setItem('rate-save', document.getElementById('exchangeRate').innerHTML);
-    sessionStorage.setItem('parent-save', document.getElementById('parentAnchor').innerHTML);
-    sessionStorage.setItem('child-save', document.getElementById('childAnchor').innerHTML);
-    sessionStorage.setItem('date-save', document.getElementById('timeAnchor').innerHTML);
-  };
-};
-
-
 let getSession = () => {
   window.onload = () => {
-    document.getElementById('exchangeRate').innerHTML = sessionStorage.getItem('rate-save');
-    document.getElementById('parentAnchor').innerHTML = sessionStorage.getItem('parent-save');
-    document.getElementById('childAnchor').innerHTML = sessionStorage.getItem('child-save');
-    document.getElementById('timeAnchor').innerHTML = sessionStorage.getItem('date-save');
-  }
+    let data = sessionStorage.getItem('xchg-info');
+    document.querySelector('p.exchange-info').innerText = data || "Your currency manipulations will appear here.";
+  };
 };
